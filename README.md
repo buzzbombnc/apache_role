@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Apache role that will likely only work with my weird Slackware server configurations.
+Apache role that installs my specific weird configuration.
 
 Requirements
 ------------
@@ -12,7 +12,13 @@ Requirements
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+The following variables are defined in vars/main.yml:
+
+| Variable         | Default | Description                                                                    |
+|:----------------:|:-------:|:-------------------------------------------------------------------------------|
+|apache_autostart  | true    |Autostart on server restart?                                                    |
+|apache_restart    | true    |(Re)start on install?                                                           |
+|apache_ssl_enabled| true    |Base SSL enabled?  Only enables modules.  Certificates are on a per-site basis. |
 
 Dependencies
 ------------
