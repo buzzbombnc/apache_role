@@ -4,6 +4,23 @@
   notify:
     - restart apache
 
+- name: create configuration directories
+  file: path="{{ item }}" owner=root group=root mode=0755 state=directory
+  with_items:
+    - /etc/httpd/domains
+    - /etc/httpd/sites
+  notify:
+    - restart apache
+
+- name: add configuration includes
+  blockinfile:
+    dest: /etc/httpd/httpd.conf
+    marker: "# {mark} ANSIBLE MANAGED 'SITES' BLOCK"
+    validate: "/usr/sbin/httpd -S -f %s"
+    content: "IncludeOptional /etc/httpd/sites/*.conf"
+  notify:
+    - restart apache
+
 - name: enable Apache autostart
   file: path=/etc/rc.d/rc.httpd mode=0755
   when: apache_autostart
