@@ -1,5 +1,5 @@
-Role Name
-=========
+apache_role
+===========
 
 Apache role that installs my specific weird configuration.
 
