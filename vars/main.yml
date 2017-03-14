@@ -4,3 +4,6 @@
 apache_autostart: true
 # (Re)start on install?
 apache_restart: true
+# Base SSL enabled?  Only enables modules.  Certificates are on a per-site basis.
+apache_ssl_enabled: true
+

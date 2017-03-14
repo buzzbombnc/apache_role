@@ -12,7 +12,23 @@
   notify:
     - restart apache
 
-- name: add configuration includes
+- name: add Apache ssl.conf file
+  template: src=ssl.conf.j2 dest=/etc/httpd/ssl.conf owner=root group=root mode=0644
+  when: apache_ssl_enabled
+  notify:
+    - restart apache
+
+- name: add ssl.conf configuration include
+  blockinfile:
+    dest: /etc/httpd/httpd.conf
+    marker: "# {mark} ANSIBLE MANAGED 'SSL' BLOCK"
+    validate: "/usr/sbin/httpd -S -f %s"
+    content: "Include /etc/httpd/ssl.conf"
+  when: apache_ssl_enabled
+  notify:
+    - restart apache
+
+- name: add sites configuration include
   blockinfile:
     dest: /etc/httpd/httpd.conf
     marker: "# {mark} ANSIBLE MANAGED 'SITES' BLOCK"
