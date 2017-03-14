@@ -1,3 +1,10 @@
 ---
 - name: install Apache webserver
   slackpkg: name=httpd state=present
+  notify:
+    - restart apache
+
+- name: enable Apache autostart
+  file: path=/etc/rc.d/rc.httpd mode=0755
+  when: apache_autostart
+

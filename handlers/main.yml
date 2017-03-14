@@ -1,2 +1,5 @@
 ---
 # handlers file for apache_role
+- name: restart apache
+  command: "/usr/sbin/apachectl -k restart"
+  when: apache_restart

@@ -1,2 +1,6 @@
 ---
 # vars file for apache_role
+# Autostart on server restart?
+apache_autostart: true
+# (Re)start on install?
+apache_restart: true
