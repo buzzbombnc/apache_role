@@ -2,4 +2,6 @@
 # handlers file for apache_role
 - name: restart apache
   command: "/usr/sbin/apachectl -k restart"
+  become: true
   when: apache_restart
+
