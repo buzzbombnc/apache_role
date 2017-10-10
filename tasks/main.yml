@@ -7,8 +7,7 @@
 - name: create configuration directories
   file: path="{{ item }}" owner=root group=root mode=0755 state=directory
   with_items:
-    - /etc/httpd/domains
-    - /etc/httpd/sites
+    - /etc/httpd/vhosts
   notify:
     - restart apache
 
@@ -28,12 +27,12 @@
   notify:
     - restart apache
 
-- name: add sites configuration include
+- name: add vhosts configuration include
   blockinfile:
     dest: /etc/httpd/httpd.conf
-    marker: "# {mark} ANSIBLE MANAGED 'SITES' BLOCK"
+    marker: "# {mark} ANSIBLE MANAGED 'VHOSTS' BLOCK"
     validate: "/usr/sbin/httpd -S -f %s"
-    content: "IncludeOptional /etc/httpd/sites/*.conf"
+    content: "IncludeOptional /etc/httpd/vhosts/*.conf"
   notify:
     - restart apache
 
