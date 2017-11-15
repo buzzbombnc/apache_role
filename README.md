@@ -8,6 +8,7 @@ Requirements
 
 * Slackware 14.2
 * `slackpkg` configured with an acceptable mirror.
+* `become: true`
 
 Role Variables
 --------------
@@ -31,6 +32,7 @@ Example Playbook
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
     - hosts: servers
+      become: true
       roles:
          - { role: apache_role }
 

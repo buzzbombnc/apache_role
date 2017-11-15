@@ -7,7 +7,7 @@
 - name: create configuration directories
   file: path="{{ item }}" owner=root group=root mode=0755 state=directory
   with_items:
-    - /etc/httpd/vhosts
+    - /etc/httpd/conf.d
   notify:
     - restart apache
 
@@ -27,16 +27,15 @@
   notify:
     - restart apache
 
-- name: add vhosts configuration include
+- name: add conf.d configuration include
   blockinfile:
     dest: /etc/httpd/httpd.conf
-    marker: "# {mark} ANSIBLE MANAGED 'VHOSTS' BLOCK"
+    marker: "# {mark} ANSIBLE MANAGED 'CONF.D' BLOCK"
     validate: "/usr/sbin/httpd -S -f %s"
-    content: "IncludeOptional /etc/httpd/vhosts/*.conf"
+    content: "IncludeOptional /etc/httpd/conf.d/*.conf"
   notify:
     - restart apache
 
 - name: enable Apache autostart
   file: path=/etc/rc.d/rc.httpd mode=0755
   when: apache_autostart
-
